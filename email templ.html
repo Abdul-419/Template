@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .notification-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .notification-table th, .notification-table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .notification-table th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            color: red;
+        }
+        .section-title {
+            font-weight: bold;
+        }
+        .border-box {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        select {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Service Impact Notification</h2>
+
+<div class="border-box">
+    <p><span class="section-title">Activity:</span> Replace with the description of the change activities.</p>
+
+    <p><span class="section-title">Impact:</span> Insert here who (team/users) is affected.</p>
+</div>
+
+<h3>Additional Information</h3>
+<div class="border-box">
+    <ul>
+        <li>Change Window Details are listed below:</li>
+        <li><strong>Patch Window Start:</strong>
+            <select id="startDate"></select>
+            <select id="startTime">
+                <option value="00:00">00:00</option>
+                <option value="12:00">12:00</option>
+                <option value="18:00">18:00</option>
+            </select> EST
+        </li>
+        <li><strong>Patch Window End:</strong> 
+            <select id="endDate"></select>
+            <select id="endTime">
+                <option value="23:59">23:59</option>
+                <option value="12:00">12:00</option>
+                <option value="18:00">18:00</option>
+            </select> EST
+        </li>
+    </ul>
+
+    <p><span class="section-title">Action Required:</span> Users will not have access to updated data during this activity.</p>
+
+    <p><span class="section-title">Note:</span> All above mentioned activities will be performed between <span class="highlight" id="dateRange">1-January-2022 00:00 EST to 1-January-2022 23:59 EST</span>.</p>
+</div>
+
+<h3>Target Dates and Timelines</h3>
+<table class="notification-table">
+    <tr>
+        <th>Activity</th>
+        <th>Start</th>
+        <th>End</th>
+    </tr>
+    <tr>
+        <td>Activity 1</td>
+        <td id="displayStart">1-January-2022 00:00 EST</td>
+        <td id="displayEnd">1-January-2022 23:59 EST</td>
+    </tr>
+    <!-- Add more rows as needed -->
+</table>
+
+<button onclick="updateDateTime()">Update Date/Time</button>
+
+<script>
+    // Function to format date as dd-MMM-yyyy
+    function formatDate(date) {
+        const day = ("0" + date.getDate()).slice(-2); // Get day and add leading 0 if needed
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
+    // Get current date
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    // Set start and end date dropdowns with current and next day options
+    document.getElementById('startDate').innerHTML = `
+        <option value="${formatDate(today)}">${formatDate(today)}</option>
+        <option value="${formatDate(tomorrow)}">${formatDate(tomorrow)}</option>
+    `;
+
+    document.getElementById('endDate').innerHTML = `
+        <option value="${formatDate(today)}">${formatDate(today)}</option>
+        <option value="${formatDate(tomorrow)}">${formatDate(tomorrow)}</option>
+    `;
+
+    function updateDateTime() {
+        // Get selected date and time
+        var startDate = document.getElementById('startDate').value;
+        var startTime = document.getElementById('startTime').value;
+        var endDate = document.getElementById('endDate').value;
+        var endTime = document.getElementById('endTime').value;
+
+        // Update the relevant fields
+        var start = startDate + " " + startTime + " EST";
+        var end = endDate + " " + endTime + " EST";
+
+        document.getElementById('displayStart').innerText = start;
+        document.getElementById('displayEnd').innerText = end;
+        document.getElementById('dateRange').innerText = start + " to " + end;
+    }
+</script>
+
+</body>
+</html>
