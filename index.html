@@ -47,8 +47,8 @@
 <div class="border-box">
     <ul>
         <li>Change Window Details are listed below:</li>
-        <li><strong>Patch Window Start:</strong> <span id="patchStart"></span></li>
-        <li><strong>Patch Window End:</strong> <span id="patchEnd"></span></li>
+        <li><strong>Change Window Start:</strong> <input type="text" id="patchStart" oninput="updateDateRange()"> 00:00 EST</li>
+        <li><strong>Change Window End:</strong> <input type="text" id="patchEnd" oninput="updateDateRange()"> 23:59 EST</li>
     </ul>
 
     <p><span class="section-title">Action Required:</span> Users will not have access to updated data during this activity.</p>
@@ -71,29 +71,13 @@
 </table>
 
 <script>
-    // Function to format date as dd-MMM-yyyy
-    function formatDate(date) {
-        const day = ("0" + date.getDate()).slice(-2); // Get day and add leading 0 if needed
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
+    function updateDateRange() {
+        const startDate = document.getElementById('patchStart').value;
+        const endDate = document.getElementById('patchEnd').value;
+        document.getElementById('dateRange').innerText = `${startDate} 00:00 EST to ${endDate} 23:59 EST`;
+        document.getElementById('displayStart').innerText = `${startDate} 00:00 EST`;
+        document.getElementById('displayEnd').innerText = `${endDate} 23:59 EST`;
     }
-
-    // Get current date
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-
-    // Pre-fill the dates statically into the page
-    const startDate = formatDate(today);
-    const endDate = formatDate(tomorrow);
-
-    document.getElementById('patchStart').innerText = startDate + " 00:00 EST";
-    document.getElementById('patchEnd').innerText = endDate + " 23:59 EST";
-    document.getElementById('dateRange').innerText = startDate + " 00:00 EST to " + endDate + " 23:59 EST";
-    document.getElementById('displayStart').innerText = startDate + " 00:00 EST";
-    document.getElementById('displayEnd').innerText = endDate + " 23:59 EST";
 </script>
 
 </body>
