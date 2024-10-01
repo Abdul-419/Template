@@ -8,17 +8,14 @@
         body {
             font-family: Arial, sans-serif;
         }
-        .notification-table {
-            width: 100%;
+        table {
             border-collapse: collapse;
+            width: 100%;
         }
-        .notification-table th, .notification-table td {
+        th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
-        }
-        .notification-table th {
-            background-color: #f2f2f2;
         }
         .highlight {
             color: red;
@@ -26,76 +23,131 @@
         .section-title {
             font-weight: bold;
         }
-        .border-box {
-            border: 1px solid black;
-            padding: 10px;
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
 
-<h2>Service Impact Notification</h2>
-
-<div class="border-box">
-    <p><span class="section-title">Activity:</span> Replace with the description of the change activities.</p>
-
-    <p><span class="section-title">Impact:</span> Insert here who (team/users) is affected.</p>
-</div>
-
-<h3>Additional Information</h3>
-<div class="border-box">
-    <ul>
-        <li><strong>Change Window Start:</strong> 
-            <input type="text" id="patchStart" placeholder="YYYY-MM-DD" oninput="updateDateRange()"> 
-            <input type="text" id="startTime" placeholder="HH:MM" oninput="updateDateRange()"> EST
-        </li>
-        <li><strong>Change Window End:</strong> 
-            <input type="text" id="patchEnd" placeholder="YYYY-MM-DD" oninput="updateDateRange()"> 
-            <input type="text" id="endTime" placeholder="HH:MM" oninput="updateDateRange()"> EST
-        </li>
-    </ul>
-
-    <p><span class="section-title">Action Required:</span> Users will not have access to updated data during this activity.</p>
-
-    <p><span class="section-title">Note:</span> All above mentioned activities will be performed between <span id="dateRange" class="highlight"></span>.</p>
-</div>
-
-<h3>Target Dates and Timelines</h3>
-<table class="notification-table">
+<!-- Change Information Section -->
+<table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
     <tr>
-        <th>Activity</th>
-        <th>Start</th>
-        <th>End</th>
+        <td>
+            <p><span class="section-title">Activity:</span> Replace with the description of the change activities.</p>
+            <p><span class="section-title">Impact:</span> Insert here who (team/users) is affected.</p>
+            <p><span class="section-title">Action Required:</span> Users will not have access to updated data during this activity.</p>
+        </td>
     </tr>
+</table>
+
+<!-- Additional Information Section -->
+<table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
     <tr>
-        <td>Activity 1</td>
-        <td id="displayStart"></td>
-        <td></td>
+        <td>
+            <p><span class="section-title">Additional Information:</span></p>
+            <p>Change Window Details can be found below:</p>
+            <ul style="line-height: 2;">
+                <li><strong>Change Window Start:</strong> <span id="patchStartDisplay"></span> <span id="startTimeDisplay"></span> CST</li>
+                <li><strong>Change Window End:</strong> <span id="patchEndDisplay"></span> <span id="endTimeDisplay"></span> CST</li>
+                <li><strong>Change #:</strong> Replace with additional change details.</li>
+            </ul>
+        </td>
     </tr>
+</table>
+
+<!-- Target Dates and Timeline Section -->
+<table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
     <tr>
-        <td>Activity 2</td>
-        <td></td>
-        <td></td>
+        <td>
+            <p><span class="section-title">Note:</span> All above mentioned activities will be performed between <span id="dateRangeDisplay" class="highlight"></span>. Please see detailed timeline below:</p>
+
+            <table style="width: 100%; border: 1px solid black;">
+                <tr>
+                    <th style="border: 1px solid black;">Start</th>
+                    <th style="border: 1px solid black;">End</th>
+                    <th style="border: 1px solid black;">Activity</th>
+                </tr>
+                <tr>
+                    <td id="displayStart" style="border: 1px solid black;"></td>
+                    <td id="displayEnd" style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">Activity 1</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">Activity 2</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">Activity 3</td>
+                </tr>
+            </table>
+        </td>
     </tr>
+</table>
+
+<!-- Contact Us Section -->
+<table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
     <tr>
-        <td>Activity 3</td>
-        <td></td>
-        <td id="displayEnd"></td>
+        <td>
+            <p>Please contact <strong>Operations</strong> with any questions and concerns.</p>
+            <p>ServiceNow: GL OPERATIONS</p>
+        </td>
+    </tr>
+</table>
+
+<!-- Fill in Details Section -->
+<table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <tr>
+        <td>
+            <label for="patchStart">Start Date (DD-MM-YYYY):</label>
+            <input type="text" id="patchStart" placeholder="DD-MM-YYYY">
+            <label for="startTime">Start Time (HH:MM):</label>
+            <input type="text" id="startTime" placeholder="HH:MM" value="00:00">
+            <br><br>
+            <label for="patchEnd">End Date (DD-MM-YYYY):</label>
+            <input type="text" id="patchEnd" placeholder="DD-MM-YYYY">
+            <label for="endTime">End Time (HH:MM):</label>
+            <input type="text" id="endTime" placeholder="HH:MM" value="23:59">
+            <br><br>
+            <button onclick="generateOutput()">Generate Output</button>
+        </td>
     </tr>
 </table>
 
 <script>
-    function updateDateRange() {
+    // Set current date as default for the input fields when the page loads
+    window.onload = function() {
+        const today = new Date();
+        const formattedDate = formatDate(today); // Format as DD-MMM-YYYY
+
+        document.getElementById('patchStart').value = formattedDate;
+        document.getElementById('patchEnd').value = formattedDate;
+    };
+
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
+    function generateOutput() {
         const startDate = document.getElementById('patchStart').value;
         const endDate = document.getElementById('patchEnd').value;
-        const startTime = document.getElementById('startTime').value || "00:00";
-        const endTime = document.getElementById('endTime').value || "23:59";
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
 
-        // Update the date range and table fields
-        document.getElementById('dateRange').innerText = `${startDate} ${startTime} EST to ${endDate} ${endTime} EST`;
-        document.getElementById('displayStart').innerText = `${startDate} ${startTime} EST`;
-        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} EST`;
+        // Update the display fields with the values from the inputs
+        document.getElementById('patchStartDisplay').innerText = startDate;
+        document.getElementById('patchEndDisplay').innerText = endDate;
+        document.getElementById('startTimeDisplay').innerText = startTime;
+        document.getElementById('endTimeDisplay').innerText = endTime;
+
+        document.getElementById('displayStart').innerText = `${startDate} ${startTime} CST`;
+        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} CST`;
+
+        document.getElementById('dateRangeDisplay').innerText = `${startDate} ${startTime} CST to ${endDate} ${endTime} CST`;
     }
 </script>
 
