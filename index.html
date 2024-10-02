@@ -23,11 +23,8 @@
         .section-title {
             font-weight: bold;
         }
-        .section {
-            margin-bottom: 10px; /* Adds space before each section */
-        }
         .section + .section {
-            margin-top: 30px; /* Adds space after each section */
+            margin-top: 0px; /* Removes any reliance on margin */
         }
         .date-time {
             color: red; /* Applies red color to dates and times */
@@ -49,6 +46,7 @@
         </tr>
     </table>
 </div>
+<br> <!-- Adds a line break after the section -->
 
 <!-- Additional Information Section -->
 <div class="section">
@@ -66,41 +64,35 @@
         </tr>
     </table>
 </div>
+<br> <!-- Adds a line break after the section -->
 
 <!-- Target Dates and Timelines Section -->
 <div class="section">
     <h3 style="color: black;">Target Dates and Timelines</h3>
     <table style="border: 1px solid black; width: 100%;">
         <tr>
-            <td>
-                <p>All above mentioned activities will be performed between <span id="dateRangeDisplay" class="highlight"></span>. Please see detailed timeline below:</p>
-
-                <table style="width: 100%; border: 1px solid black;">
-                    <tr>
-                        <th style="border: 1px solid black;">Start</th>
-                        <th style="border: 1px solid black;">End</th>
-                        <th style="border: 1px solid black;">Activity</th>
-                    </tr>
-                    <tr>
-                        <td id="displayStart" class="date-time" style="border: 1px solid black;"></td>
-                        <td id="displayEnd" class="date-time" style="border: 1px solid black;"></td>
-                        <td style="border: 1px solid black;">Activity 1</td>
-                    </tr>
-                    <tr>
-                        <td style="border: 1px solid black;"></td>
-                        <td style="border: 1px solid black;"></td>
-                        <td style="border: 1px solid black;">Activity 2</td>
-                    </tr>
-                    <tr>
-                        <td style="border: 1px solid black;"></td>
-                        <td style="border: 1px solid black;"></td>
-                        <td style="border: 1px solid black;">Activity 3</td>
-                    </tr>
-                </table>
-            </td>
+            <th style="border: 1px solid black;">Start</th>
+            <th style="border: 1px solid black;">End</th>
+            <th style="border: 1px solid black;">Activity</th>
+        </tr>
+        <tr>
+            <td id="displayStart" class="date-time" style="border: 1px solid black;"></td>
+            <td style="border: 1px solid black;"></td> <!-- Leave this blank -->
+            <td style="border: 1px solid black;">Activity 1</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"></td>
+            <td style="border: 1px solid black;"></td>
+            <td style="border: 1px solid black;">Activity 2</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"></td>
+            <td id="displayEnd" class="date-time" style="border: 1px solid black;"></td> <!-- End Date and Time will be inserted here in red -->
+            <td style="border: 1px solid black;">Activity 3</td>
         </tr>
     </table>
 </div>
+<br> <!-- Adds a line break after the section -->
 
 <!-- Contact Us Section -->
 <div class="section">
@@ -114,6 +106,7 @@
         </tr>
     </table>
 </div>
+<br> <!-- Adds a line break after the section -->
 
 <!-- Fill in Details Section -->
 <div class="section">
@@ -168,7 +161,10 @@
         document.getElementById('endTimeDisplay').innerText = endTime;
 
         document.getElementById('displayStart').innerText = `${startDate} ${startTime} CST`;
-        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} CST`;
+        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} CST`; // End Date and Time inserted here when generated in red font
+
+        document.getElementById('displayStart').classList.add('date-time'); // Ensure the start date is red
+        document.getElementById('displayEnd').classList.add('date-time');   // Ensure the end date is red
 
         document.getElementById('dateRangeDisplay').innerText = `${startDate} ${startTime} CST to ${endDate} ${endTime} CST`;
     }
