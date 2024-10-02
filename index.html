@@ -24,7 +24,13 @@
             font-weight: bold;
         }
         .section {
-            margin-bottom: 20px; /* Adds space before and after each section */
+            margin-bottom: 10px; /* Adds space before each section */
+        }
+        .section + .section {
+            margin-top: 30px; /* Adds space after each section */
+        }
+        .date-time {
+            color: red; /* Applies red color to dates and times */
         }
     </style>
 </head>
@@ -32,8 +38,8 @@
 
 <!-- Change Information Section -->
 <div class="section">
-    <h3>Change Information</h3>
-    <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <h3 style="color: black;">Change Information</h3>
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
             <td>
                 <p><span class="section-title">Activity:</span> Replace with the description of the change activities.</p>
@@ -46,14 +52,14 @@
 
 <!-- Additional Information Section -->
 <div class="section">
-    <h3>Additional Information</h3>
-    <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <h3 style="color: black;">Additional Information</h3>
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
             <td>
                 <p>Change Window Details can be found below:</p>
                 <ul style="line-height: 2;">
-                    <li><strong>Change Window Start:</strong> <span id="patchStartDisplay"></span> <span id="startTimeDisplay"></span> CST</li>
-                    <li><strong>Change Window End:</strong> <span id="patchEndDisplay"></span> <span id="endTimeDisplay"></span> CST</li>
+                    <li><strong>Change Window Start:</strong> <span id="patchStartDisplay" class="date-time"></span> <span id="startTimeDisplay" class="date-time"></span> CST</li>
+                    <li><strong>Change Window End:</strong> <span id="patchEndDisplay" class="date-time"></span> <span id="endTimeDisplay" class="date-time"></span> CST</li>
                     <li><strong>Change #:</strong> Replace with additional change details.</li>
                 </ul>
             </td>
@@ -63,8 +69,8 @@
 
 <!-- Target Dates and Timelines Section -->
 <div class="section">
-    <h3>Target Dates and Timelines</h3>
-    <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <h3 style="color: black;">Target Dates and Timelines</h3>
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
             <td>
                 <p>All above mentioned activities will be performed between <span id="dateRangeDisplay" class="highlight"></span>. Please see detailed timeline below:</p>
@@ -76,8 +82,8 @@
                         <th style="border: 1px solid black;">Activity</th>
                     </tr>
                     <tr>
-                        <td id="displayStart" style="border: 1px solid black;"></td>
-                        <td id="displayEnd" style="border: 1px solid black;"></td>
+                        <td id="displayStart" class="date-time" style="border: 1px solid black;"></td>
+                        <td id="displayEnd" class="date-time" style="border: 1px solid black;"></td>
                         <td style="border: 1px solid black;">Activity 1</td>
                     </tr>
                     <tr>
@@ -98,8 +104,8 @@
 
 <!-- Contact Us Section -->
 <div class="section">
-    <h3>Contact Us</h3>
-    <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <h3 style="color: black;">Contact Us</h3>
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
             <td>
                 <p>Please contact <strong>Operations</strong> with any questions and concerns.</p>
@@ -111,18 +117,18 @@
 
 <!-- Fill in Details Section -->
 <div class="section">
-    <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
             <td>
                 <label for="patchStart">Start Date:</label>
-                <input type="text" id="patchStart" placeholder="DD-MM-YYYY">
+                <input type="text" id="patchStart" placeholder="DD-MM-YYYY" class="date-time">
                 <label for="startTime">Start Time:</label>
-                <input type="text" id="startTime" placeholder="HH:MM" value="00:00">
+                <input type="text" id="startTime" placeholder="HH:MM" value="00:00" class="date-time">
                 <br><br>
                 <label for="patchEnd">End Date:</label>
-                <input type="text" id="patchEnd" placeholder="DD-MM-YYYY">
+                <input type="text" id="patchEnd" placeholder="DD-MM-YYYY" class="date-time">
                 <label for="endTime">End Time:</label>
-                <input type="text" id="endTime" placeholder="HH:MM" value="23:59">
+                <input type="text" id="endTime" placeholder="HH:MM" value="23:59" class="date-time">
                 <br><br>
                 <button onclick="generateOutput()">Generate Output</button>
             </td>
