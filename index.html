@@ -32,7 +32,7 @@
 
 <!-- Change Information Section -->
 <div class="section">
-    <h3>Change Information</h3> <!-- Added Change Information header -->
+    <h3>Change Information</h3>
     <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
         <tr>
             <td>
@@ -63,7 +63,7 @@
 
 <!-- Target Dates and Timelines Section -->
 <div class="section">
-    <h3>Target Dates and Timelines</h3> <!-- Added Target Dates and Timelines header -->
+    <h3>Target Dates and Timelines</h3>
     <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
         <tr>
             <td>
@@ -98,7 +98,7 @@
 
 <!-- Contact Us Section -->
 <div class="section">
-    <h3>Contact Us</h3> <!-- Added Contact Us header -->
+    <h3>Contact Us</h3>
     <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
         <tr>
             <td>
@@ -114,14 +114,14 @@
     <table style="border: 1px solid black; width: 100%; margin-bottom: 10px;">
         <tr>
             <td>
-                <label for="patchStart">Start Date:</label> <!-- Removed (DD-MM-YYYY) -->
+                <label for="patchStart">Start Date:</label>
                 <input type="text" id="patchStart" placeholder="DD-MM-YYYY">
-                <label for="startTime">Start Time:</label> <!-- Removed (HH:MM) -->
+                <label for="startTime">Start Time:</label>
                 <input type="text" id="startTime" placeholder="HH:MM" value="00:00">
                 <br><br>
-                <label for="patchEnd">End Date:</label> <!-- Removed (DD-MM-YYYY) -->
+                <label for="patchEnd">End Date:</label>
                 <input type="text" id="patchEnd" placeholder="DD-MM-YYYY">
-                <label for="endTime">End Time:</label> <!-- Removed (HH:MM) -->
+                <label for="endTime">End Time:</label>
                 <input type="text" id="endTime" placeholder="HH:MM" value="23:59">
                 <br><br>
                 <button onclick="generateOutput()">Generate Output</button>
@@ -131,14 +131,15 @@
 </div>
 
 <script>
-    // Set current date as default for the input fields when the page loads
-    window.onload = function() {
+    // Run the function when the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
         const today = new Date();
         const formattedDate = formatDate(today); // Format as DD-MMM-YYYY
 
+        // Set the default values in the input fields
         document.getElementById('patchStart').value = formattedDate;
         document.getElementById('patchEnd').value = formattedDate;
-    };
+    });
 
     function formatDate(date) {
         const day = String(date.getDate()).padStart(2, '0');
