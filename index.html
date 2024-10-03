@@ -67,25 +67,26 @@
 <!-- Target Dates and Timelines Section -->
 <div class="section">
     <h3 style="color: black;">Target Dates and Timelines</h3>
+    <p><strong>Note:</strong> All above mentioned activities will be performed between <span id="dateRangeDisplay" class="date-time"></span>. Please see detailed timeline below:</p>
     <table style="border: 1px solid black; width: 100%;">
         <tr>
-            <th style="border: 1px solid black;">Start</th>
-            <th style="border: 1px solid black;">End</th>
-            <th style="border: 1px solid black;">Activity</th>
+            <th style="border: 1px solid black; width: 20%;">Start</th>
+            <th style="border: 1px solid black; width: 20%;">End</th>
+            <th style="border: 1px solid black; width: 60%;">Activity</th>
         </tr>
         <tr>
             <td id="displayStart" class="date-time" style="border: 1px solid black;"></td>
-            <td style="border: 1px solid black;"></td> <!-- Leave this blank -->
+            <td id="endActivity1" style="border: 1px solid black;"></td> <!-- End for Activity 1 -->
             <td style="border: 1px solid black;">Activity 1</td>
         </tr>
         <tr>
-            <td style="border: 1px solid black;"></td>
-            <td style="border: 1px solid black;"></td>
+            <td id="startActivity2" style="border: 1px solid black;"></td> <!-- Start for Activity 2 -->
+            <td id="endActivity2" style="border: 1px solid black;"></td> <!-- End for Activity 2 -->
             <td style="border: 1px solid black;">Activity 2</td>
         </tr>
         <tr>
-            <td style="border: 1px solid black;"></td>
-            <td id="displayEnd" class="date-time" style="border: 1px solid black;"></td> <!-- End Date and Time will be inserted here -->
+            <td id="startActivity3" style="border: 1px solid black;"></td> <!-- Start for Activity 3 -->
+            <td id="displayEnd" class="date-time" style="border: 1px solid black;"></td> <!-- End for Activity 3 -->
             <td style="border: 1px solid black;">Activity 3</td>
         </tr>
     </table>
@@ -125,6 +126,10 @@
     </table>
 </div>
 
+
+
+
+
 <script>
     // Run the function when the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function() {
@@ -157,14 +162,32 @@
         document.getElementById('endTimeDisplay').innerText = endTime;
 
         document.getElementById('displayStart').innerText = `${startDate} ${startTime} CST`;
-        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} CST`; // End Date and Time inserted here when generated in red font
+        document.getElementById('displayEnd').innerText = `${endDate} ${endTime} CST`;
 
-        document.getElementById('displayStart').classList.add('date-time'); // Ensure the start date is red
-        document.getElementById('displayEnd').classList.add('date-time');   // Ensure the end date is red
+        // Auto-populate remaining empty fields with current date and time 00:00
+        const currentDate = formatDate(new Date());
+        const defaultTime = "00:00";
 
+        document.getElementById('endActivity1').innerText = `${currentDate} ${defaultTime} CST`; // End for Activity 1
+        document.getElementById('startActivity2').innerText = `${currentDate} ${defaultTime} CST`; // Start for Activity 2
+        document.getElementById('endActivity2').innerText = `${currentDate} ${defaultTime} CST`; // End for Activity 2
+        document.getElementById('startActivity3').innerText = `${currentDate} ${defaultTime} CST`; // Start for Activity 3
+
+        // Apply the red font class to all newly updated fields
+        document.getElementById('endActivity1').classList.add('date-time');
+        document.getElementById('startActivity2').classList.add('date-time');
+        document.getElementById('endActivity2').classList.add('date-time');
+        document.getElementById('startActivity3').classList.add('date-time');
+
+        // Ensure the start and end fields also stay red
+        document.getElementById('displayStart').classList.add('date-time');
+        document.getElementById('displayEnd').classList.add('date-time');
+
+        // Update the note with the generated date range
         document.getElementById('dateRangeDisplay').innerText = `${startDate} ${startTime} CST to ${endDate} ${endTime} CST`;
     }
 </script>
 
 </body>
 </html>
+
